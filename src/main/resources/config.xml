@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <configuration>
-	<test>hehehe</test>
+	<mysql>
+		<driver>com.mysql.jdbc.Driver</driver>
+		<url>jdbc:mysql://192.168.99.100:3306/longconn</url>
+		<userName>root</userName>
+		<password>root</password>
+		<maxIdle>5</maxIdle>
+		<minIdle>0</minIdle>
+		<initialSize>1</initialSize>
+		<maxActive>5</maxActive>
+	</mysql>
+
 	<netty>
 		<resourceLeakDetectLv>SIMPLE</resourceLeakDetectLv>
 		<workerThreadNum>4</workerThreadNum>
@@ -52,14 +62,4 @@
 		<connectTimeout>1000</connectTimeout>
 		<socketTimeout>3000</socketTimeout>
 	</http>
-	<mysql>
-		<driver>com.mysql.jdbc.Driver</driver>
-		<url>jdbc:mysql://172.16.36.34:3615/tta_netty_push</url>
-		<userName>tta_mysql_test</userName>
-		<password>tta123456</password>
-		<maxIdle>5</maxIdle>
-		<minIdle>0</minIdle>
-		<initialSize>1</initialSize>
-		<maxActive>5</maxActive>
-	</mysql>
 </configuration>

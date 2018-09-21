@@ -1,30 +1,23 @@
 package com.huo.longconn.utils;
 
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.configuration2.XMLConfiguration;
-import org.apache.commons.configuration2.builder.fluent.Configurations;
-import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.commons.configuration2.tree.DefaultExpressionEngine;
-import org.apache.commons.configuration2.tree.DefaultExpressionEngineSymbols;
-import org.apache.commons.configuration2.tree.xpath.XPathExpressionEngine;
-
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log4j2
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.XMLConfiguration;
+
 public class ConfigUtil {
 
     private static XMLConfiguration config = null;
-    private static final String CONFIG_XML_PATH = "/config.xml";
+    private static final String CONFIG_XML_LOCATION = "/config.xml";
 
     static {
         try {
-            Configurations configs = new Configurations();
-            config = configs.xml(ConfigUtil.class.getResource(CONFIG_XML_PATH));
-            XPathExpressionEngine xpathEngine = new XPathExpressionEngine();
-            config.setExpressionEngine(xpathEngine);
+            URL url = ConfigUtil.class.getResource(CONFIG_XML_LOCATION);
+            config = new XMLConfiguration(url);
         } catch (ConfigurationException e) {
-            log.error("初始化ConfigUtil异常 {}", e);
+            e.printStackTrace();
         }
     }
 
@@ -185,5 +178,16 @@ public class ConfigUtil {
      */
     public static void add(String configXPath, Object value) {
         config.addProperty(configXPath, value);
+    }
+
+    /**
+     * 保存配置
+     */
+    public static void save() {
+        try {
+            config.save();
+        } catch (ConfigurationException e) {
+            e.printStackTrace();
+        }
     }
 }
